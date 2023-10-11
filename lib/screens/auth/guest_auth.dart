@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'auth.dart';
+import 'authenticate.dart';
+
 class GuestAuth extends StatefulWidget {
   const GuestAuth({ Key? key }) : super(key: key);
 
@@ -20,7 +23,8 @@ class _GuestAuthState extends State<GuestAuth> {
       String? $selectedItem = 'Parents/Guardian';
       // String selectedItem = 'Option 1';
       // List<String> items = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-
+  final AuthFirebase _auth = AuthFirebase();
+  
   @override
   Widget build(BuildContext context) {
     $ScreenHeight = MediaQuery.of(context).size.height / 100;
@@ -34,10 +38,9 @@ class _GuestAuthState extends State<GuestAuth> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: $ScreenWidth * 100,
                 height: $ScreenHeight * $temp_var,
-                color: Colors.blue,
               ),
               Container(
                 color: Colors.amber,
@@ -264,7 +267,17 @@ class _GuestAuthState extends State<GuestAuth> {
                 width: $ScreenWidth * 80,
                 height: $ScreenHeight * 5.5,
                 child: ElevatedButton(
-                  onPressed: () =>  $Color4_gray,
+                  onPressed: () async {
+                    dynamic result = await _auth.signInGuest();
+
+                    if (result == null){
+                      print('error');
+                    }
+                    else{
+                      print('ANON');
+                      print(result);
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: $Color4_gray,
                     shape: RoundedRectangleBorder(
@@ -306,7 +319,7 @@ class _GuestAuthState extends State<GuestAuth> {
                           fontWeight: FontWeight.w100)),
                     ),
                     TextButton(
-                      onPressed: () => $Color4_gray,
+                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Authenticate())),
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero
                       ),
@@ -326,10 +339,9 @@ class _GuestAuthState extends State<GuestAuth> {
                 )
               ),
               //* END of Signup
-              Container(
+              SizedBox(
                 width: $ScreenWidth * 100,
                 height: $ScreenHeight * $temp_var,
-                color: Colors.blue,
               ),
             ],
           ),
