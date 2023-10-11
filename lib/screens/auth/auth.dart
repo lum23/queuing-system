@@ -5,15 +5,25 @@ import 'package:queueing_system/models/student.dart';
 class AuthFirebase{
 
   // ignore: unused_field
-  final FirebaseAuth _authen = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // User _userFromFireBase(User user) {
-  //   return user != null ? Student(uid: user.uid) : null;
-  // }
+  Student? _userFromFireBase(User? user) {
+    if (user != null) {
+      return Student(uid: user.uid);
+    } else {
+      return null;
+    }
+  }
+
+  //* Auth Stream
+  Stream<Student?> get user {
+    return _auth.authStateChanges().map((User? user) => _userFromFireBase(user));
+  }
+
   //* Signin Guest
   Future signInGuest() async {
     try {
-      UserCredential result = await _authen.signInAnonymously();
+      UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
       return user;
     } catch (e) {
@@ -30,5 +40,12 @@ class AuthFirebase{
   //* Signup
 
   //* Signout
-  
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }

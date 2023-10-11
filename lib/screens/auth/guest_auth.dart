@@ -1,5 +1,8 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:queueing_system/screens/wrapper.dart';
 
 import 'auth.dart';
 import 'authenticate.dart';
@@ -276,7 +279,15 @@ class _GuestAuthState extends State<GuestAuth> {
                     else{
                       print('ANON');
                       print(result);
+                      // Add the navigation code here
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Wrapper()),
+                      );
                     }
+
+                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: $Color4_gray,
