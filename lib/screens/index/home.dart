@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:queueing_system/screens/auth/auth.dart';
-import 'package:queueing_system/screens/index/edit_profile.dart';
+import 'package:queueing_system/screens/index/reservation_stepper.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,7 +10,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final AuthFirebase _auth = AuthFirebase();
   var $ScreenHeight,
       $ScreenWidth,
       $Color1_background = const Color(0xff013440),
@@ -96,7 +94,7 @@ class _HomeState extends State<Home> {
                         width: $ScreenWidth * 45,
                         height: $ScreenHeight * 5,
                         child: ElevatedButton(
-                            onPressed: () => $temp_var,
+                            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ReservationStepper())),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: $Color2_accent,
                                 shape: RoundedRectangleBorder(
