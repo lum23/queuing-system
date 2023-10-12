@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queueing_system/screens/auth/auth.dart';
+import 'package:queueing_system/screens/index/edit_profile.dart';
 
 class Home extends StatefulWidget {
   const Home({ Key? key }) : super(key: key);
@@ -14,25 +15,17 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return const Material(
       child: SafeArea(
-        child: Container(
-          width: 200,
-          height: 250,
-          color: Colors.green,
-          child: SizedBox(
-            width: 50,
-            height: 20,
-            child: ElevatedButton(
+        child: EditProfile()
+            // child: ElevatedButton(
 
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              child: const Text('logout')
-            ),
-          ),
+            //   onPressed: () async {
+            //     await _auth.signOut();
+            //   },
+            //   child: const Text('logout')
+            // ),
         )
-      ),
     );
   }
 }
