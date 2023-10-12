@@ -30,19 +30,23 @@ class _EditProfileState extends State<EditProfile> {
         elevation: 0.0,
         actions: <Widget>[
           IconButton(
-              onPressed: () => $temp_var, icon: const Icon(Icons.accessible))
+              onPressed: () => $temp_var, 
+              icon: const Icon(Icons.account_circle)
+          )
         ],
         // Adjust the height to your desired value
       ),
       body: SafeArea(
         child: Container(
+          width: $ScreenWidth * 100,
+          height: $ScreenHeight * 100,
           color: $Color3_text,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: $ScreenHeight * 2,
+                  height: $ScreenHeight * 1,
                 ),
                 Align(
                   alignment: Alignment.center,
@@ -52,17 +56,17 @@ class _EditProfileState extends State<EditProfile> {
                       color: Colors.grey,
                     ),
                     height:
-                        $ScreenHeight * 25, // Height at 25% of screen height
-                    width: $ScreenHeight * 25, // Width at 25% of screen height
+                        $ScreenHeight * 22, // Height at 25% of screen height
+                    width: $ScreenHeight * 22, // Width at 25% of screen height
                   ),
                 ),
 
                 SizedBox(
-                  height: $ScreenHeight * 2,
+                  height: $ScreenHeight * 1.5,
                 ),
                 SizedBox(
                   width: $ScreenWidth * 40,
-                  height: $ScreenHeight * 5.5,
+                  height: $ScreenHeight * 5,
                   child: ElevatedButton(
                       onPressed: () => $temp_var,
                       style: ElevatedButton.styleFrom(
@@ -84,227 +88,324 @@ class _EditProfileState extends State<EditProfile> {
                 SizedBox(
                   height: $ScreenHeight * 2,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'First Name',
-                      style: GoogleFonts.shipporiAntique(
-                          textStyle: TextStyle(
-                        color: $Color1_background,
-                        decoration: TextDecoration.none,
-                        fontSize: $ScreenHeight *
-                            1.8, // Font size at 3% of screen height
-                      )),
+                Container(
+                  padding: EdgeInsets.all($ScreenHeight * 1.5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: $Color4_gray
                     ),
-                    SizedBox(
-                      height: $ScreenHeight * .5,
-                    ),
-                    SizedBox(
-                      width: $ScreenWidth * 80,
-                      height: $ScreenHeight * 4.5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    BorderSide(color: $Color1_background)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    const BorderSide(color: Colors.black87)),
-                            isDense: true),
-                        style: TextStyle(color: $Color1_background),
+                    borderRadius: BorderRadius.circular($ScreenHeight * 1.3)
+                  ),
+                  child: Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'First Name',
+                            style: GoogleFonts.shipporiAntique(
+                                textStyle: TextStyle(
+                              color: $Color1_background,
+                              decoration: TextDecoration.none,
+                              fontSize: $ScreenHeight *
+                                  1.8, // Font size at 3% of screen height
+                            )),
+                          ),
+                          SizedBox(
+                            height: $ScreenHeight * .5,
+                          ),
+                          SizedBox(
+                            width: $ScreenWidth * 80,
+                            height: $ScreenHeight * 4.5,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide:
+                                          BorderSide(color: $Color1_background)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black87)),
+                                  isDense: true),
+                              style: TextStyle(color: $Color1_background),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: $ScreenHeight * 1,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Last Name',
-                      style: GoogleFonts.shipporiAntique(
-                          textStyle: TextStyle(
-                        color: $Color1_background,
-                        decoration: TextDecoration.none,
-                        fontSize: $ScreenHeight *
-                            1.8, // Font size at 3% of screen height
-                      )),
-                    ),
-                    SizedBox(
-                      height: $ScreenHeight * .5,
-                    ),
-                    SizedBox(
-                      width: $ScreenWidth * 80,
-                      height: $ScreenHeight * 4.5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    BorderSide(color: $Color1_background)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    const BorderSide(color: Colors.black87)),
-                            isDense: true),
-                        style: TextStyle(color: $Color1_background),
+                      SizedBox(
+                        height: $ScreenHeight * 1,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: $ScreenHeight * 1,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Email',
-                      style: GoogleFonts.shipporiAntique(
-                          textStyle: TextStyle(
-                        color: $Color1_background,
-                        decoration: TextDecoration.none,
-                        fontSize: $ScreenHeight *
-                            1.8, // Font size at 3% of screen height
-                      )),
-                    ),
-                    SizedBox(
-                      height: $ScreenHeight * .5,
-                    ),
-                    SizedBox(
-                      width: $ScreenWidth * 80,
-                      height: $ScreenHeight * 4.5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    BorderSide(color: $Color1_background)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    const BorderSide(color: Colors.black87)),
-                            isDense: true),
-                        style: TextStyle(color: $Color1_background),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Last Name',
+                            style: GoogleFonts.shipporiAntique(
+                                textStyle: TextStyle(
+                              color: $Color1_background,
+                              decoration: TextDecoration.none,
+                              fontSize: $ScreenHeight *
+                                  1.8, // Font size at 3% of screen height
+                            )),
+                          ),
+                          SizedBox(
+                            height: $ScreenHeight * .5,
+                          ),
+                          SizedBox(
+                            width: $ScreenWidth * 80,
+                            height: $ScreenHeight * 4.5,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide:
+                                          BorderSide(color: $Color1_background)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black87)),
+                                  isDense: true),
+                              style: TextStyle(color: $Color1_background),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: $ScreenHeight * 1,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'New Password',
-                      style: GoogleFonts.shipporiAntique(
-                          textStyle: TextStyle(
-                        color: $Color1_background,
-                        decoration: TextDecoration.none,
-                        fontSize: $ScreenHeight *
-                            1.8, // Font size at 3% of screen height
-                      )),
-                    ),
-                    SizedBox(
-                      height: $ScreenHeight * .5,
-                    ),
-                    SizedBox(
-                      width: $ScreenWidth * 80,
-                      height: $ScreenHeight * 4.5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    BorderSide(color: $Color1_background)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    const BorderSide(color: Colors.black87)),
-                            isDense: true),
-                        style: TextStyle(color: $Color1_background),
+                      SizedBox(
+                        height: $ScreenHeight * 1,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: $ScreenHeight * 1,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Confirm Password',
-                      style: GoogleFonts.shipporiAntique(
-                          textStyle: TextStyle(
-                        color: $Color1_background,
-                        decoration: TextDecoration.none,
-                        fontSize: $ScreenHeight *
-                            1.8, // Font size at 3% of screen height
-                      )),
-                    ),
-                    SizedBox(
-                      height: $ScreenHeight * .5,
-                    ),
-                    SizedBox(
-                      width: $ScreenWidth * 80,
-                      height: $ScreenHeight * 4.5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    BorderSide(color: $Color1_background)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular($ScreenHeight * 1.2),
-                                borderSide:
-                                    const BorderSide(color: Colors.black87)),
-                            isDense: true),
-                        style: TextStyle(color: $Color1_background),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Email',
+                            style: GoogleFonts.shipporiAntique(
+                                textStyle: TextStyle(
+                              color: $Color1_background,
+                              decoration: TextDecoration.none,
+                              fontSize: $ScreenHeight *
+                                  1.8, // Font size at 3% of screen height
+                            )),
+                          ),
+                          SizedBox(
+                            height: $ScreenHeight * .5,
+                          ),
+                          SizedBox(
+                            width: $ScreenWidth * 80,
+                            height: $ScreenHeight * 4.5,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide:
+                                          BorderSide(color: $Color1_background)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black87)),
+                                  isDense: true),
+                              style: TextStyle(color: $Color1_background),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: $ScreenHeight * 1,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Course',
+                            style: GoogleFonts.shipporiAntique(
+                                textStyle: TextStyle(
+                              color: $Color1_background,
+                              decoration: TextDecoration.none,
+                              fontSize: $ScreenHeight *
+                                  1.8, // Font size at 3% of screen height
+                            )),
+                          ),
+                          SizedBox(
+                            height: $ScreenHeight * .5,
+                          ),
+                          SizedBox(
+                            width: $ScreenWidth * 80,
+                            height: $ScreenHeight * 4.5,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide:
+                                          BorderSide(color: $Color1_background)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black87)),
+                                  isDense: true),
+                              style: TextStyle(color: $Color1_background),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: $ScreenHeight * 1,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Phone Number',
+                            style: GoogleFonts.shipporiAntique(
+                                textStyle: TextStyle(
+                              color: $Color1_background,
+                              decoration: TextDecoration.none,
+                              fontSize: $ScreenHeight *
+                                  1.8, // Font size at 3% of screen height
+                            )),
+                          ),
+                          SizedBox(
+                            height: $ScreenHeight * .5,
+                          ),
+                          SizedBox(
+                            width: $ScreenWidth * 80,
+                            height: $ScreenHeight * 4.5,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide:
+                                          BorderSide(color: $Color1_background)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black87)),
+                                  isDense: true),
+                              style: TextStyle(color: $Color1_background),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: $ScreenHeight * 1,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'New Password',
+                            style: GoogleFonts.shipporiAntique(
+                                textStyle: TextStyle(
+                              color: $Color1_background,
+                              decoration: TextDecoration.none,
+                              fontSize: $ScreenHeight *
+                                  1.8, // Font size at 3% of screen height
+                            )),
+                          ),
+                          SizedBox(
+                            height: $ScreenHeight * .5,
+                          ),
+                          SizedBox(
+                            width: $ScreenWidth * 80,
+                            height: $ScreenHeight * 4.5,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide:
+                                          BorderSide(color: $Color1_background)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black87)),
+                                  isDense: true),
+                              style: TextStyle(color: $Color1_background),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: $ScreenHeight * 1,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Confirm Password',
+                            style: GoogleFonts.shipporiAntique(
+                                textStyle: TextStyle(
+                              color: $Color1_background,
+                              decoration: TextDecoration.none,
+                              fontSize: $ScreenHeight *
+                                  1.8, // Font size at 3% of screen height
+                            )),
+                          ),
+                          SizedBox(
+                            height: $ScreenHeight * .5,
+                          ),
+                          SizedBox(
+                            width: $ScreenWidth * 80,
+                            height: $ScreenHeight * 4.5,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide:
+                                          BorderSide(color: $Color1_background)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          $ScreenHeight * 1.2),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black87)),
+                                  isDense: true),
+                              style: TextStyle(color: $Color1_background),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: $ScreenHeight * 2,
+                      ),
+                      SizedBox(
+                        width: $ScreenWidth * 80,
+                        height: $ScreenHeight * 5,
+                        child: ElevatedButton(
+                            onPressed: () => $temp_var,
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: $Color2_accent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        $ScreenHeight * 1.2))),
+                            child: Text(
+                              'Save',
+                              style: GoogleFonts.shipporiAntique(
+                                  textStyle: TextStyle(
+                                      height: 1.0,
+                                      color: Colors.black,
+                                      decoration: TextDecoration.none,
+                                      fontSize: $ScreenHeight * 1.8,
+                                      fontWeight: FontWeight.w600)),
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
-                  height: $ScreenHeight * 3,
-                ),
-                SizedBox(
-                  width: $ScreenWidth * 80,
-                  height: $ScreenHeight * 5.5,
-                  child: ElevatedButton(
-                      onPressed: () => $temp_var,
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: $Color2_accent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular($ScreenHeight * 1.2))),
-                      child: Text(
-                        'Save',
-                        style: GoogleFonts.shipporiAntique(
-                            textStyle: TextStyle(
-                                height: 1.0,
-                                color: Colors.black,
-                                decoration: TextDecoration.none,
-                                fontSize: $ScreenHeight * 1.8,
-                                fontWeight: FontWeight.w600)),
-                      )),
-                ),
+                  height: $ScreenHeight * 2,
+                )
               ],
             ),
           ),
