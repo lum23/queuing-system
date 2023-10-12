@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:queueing_system/screens/index/edit_profile.dart';
+
+import '../auth/auth.dart';
 
 class ReservationStepper extends StatefulWidget {
   const ReservationStepper({Key? key}) : super(key: key);
@@ -7,6 +10,7 @@ class ReservationStepper extends StatefulWidget {
   @override
   _ReservationStepperState createState() => _ReservationStepperState();
 }
+
 
 class _ReservationStepperState extends State<ReservationStepper> {
   var $ScreenHeight,
@@ -18,6 +22,8 @@ class _ReservationStepperState extends State<ReservationStepper> {
 
   int _currentStepIndex = 0;
 
+  final AuthFirebase _auth = AuthFirebase();
+  
   List<Step> steps = [
     const Step(
       title: Text(''),
@@ -62,9 +68,15 @@ class _ReservationStepperState extends State<ReservationStepper> {
           elevation: 0.0,
           actions: <Widget>[
             IconButton(
-              onPressed: () => $ScreenHeight,
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfile())),
               icon: const Icon(Icons.account_circle),
             ),
+            IconButton(
+              onPressed: () {
+                _auth.signOut();
+              }, 
+              icon: Icon(Icons.square)
+            )
           ],
         ),
         body: SafeArea(

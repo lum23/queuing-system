@@ -28,13 +28,6 @@ class _EditProfileState extends State<EditProfile> {
         backgroundColor: $Color1_background,
         toolbarHeight: 80,
         elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-              onPressed: () => $temp_var, 
-              icon: const Icon(Icons.account_circle)
-          )
-        ],
-        // Adjust the height to your desired value
       ),
       body: SafeArea(
         child: Container(

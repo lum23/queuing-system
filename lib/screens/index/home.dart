@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:queueing_system/screens/index/edit_profile.dart';
 import 'package:queueing_system/screens/index/reservation_stepper.dart';
+
+import '../auth/auth.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,6 +21,8 @@ class _HomeState extends State<Home> {
       $Color4_gray = const Color(0xff9e9e9e),
       $temp_var = 9.6;
 
+  final AuthFirebase _auth = AuthFirebase();
+
   @override
   Widget build(BuildContext context) {
     $ScreenHeight = MediaQuery.of(context).size.height / 100;
@@ -30,10 +35,17 @@ class _HomeState extends State<Home> {
         elevation: 0.0,
         actions: <Widget>[
           IconButton(
-              onPressed: () => $temp_var,
-              icon: const Icon(Icons.account_circle))
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfile())),
+              icon: const Icon(Icons.account_circle)
+          ),
+          IconButton(
+              onPressed: () {
+                _auth.signOut();
+              }, 
+              icon: Icon(Icons.square)
+          ),
         ],
-        // Adjust the height to your desired value
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Container(
@@ -65,7 +77,8 @@ class _HomeState extends State<Home> {
                         height: $ScreenHeight *
                             3, // Spacing at 2.5% of screen height
                       ),
-                      Text('WELCOME!',
+                      Text(
+                        'WELCOME!',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.russoOne(
                               textStyle: TextStyle(
@@ -78,7 +91,8 @@ class _HomeState extends State<Home> {
                         height: $ScreenHeight *
                             3, // Spacing at 2.5% of screen height
                       ),
-                      Text('Click Here to get started!',
+                      Text(
+                        'Click Here to get started!',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.russoOne(
                               textStyle: TextStyle(
