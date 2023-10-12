@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ReservationStepper extends StatefulWidget {
   const ReservationStepper({Key? key}) : super(key: key);
@@ -35,15 +36,27 @@ class _ReservationStepperState extends State<ReservationStepper> {
     ),
   ];
 
+  String getStepText() {
+    if (_currentStepIndex == 0) {
+      return 'CHOOSE DEPARTMENT';
+    } else if (_currentStepIndex == 1) {
+      return 'CHOOSE REASONS';
+    } else if (_currentStepIndex == 2) {
+      return 'CHOOSE OPTION';
+    }
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
     $ScreenHeight = MediaQuery.of(context).size.height / 100;
     $ScreenWidth = MediaQuery.of(context).size.width / 100;
 
+    int _indent = 8;
     return Material(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Chosda'),
+          title: Text('Chosda'),
           backgroundColor: $Color1_background,
           toolbarHeight: 80,
           elevation: 0.0,
@@ -57,30 +70,49 @@ class _ReservationStepperState extends State<ReservationStepper> {
         body: SafeArea(
           child: Column(
             children: [
-              Text('asdada'),
-              Stepper(
-                currentStep: _currentStepIndex,
-                type: StepperType.horizontal,
-                onStepCancel: () {
-                  if (_currentStepIndex > 0) {
+              SizedBox(
+                height: $ScreenHeight * 3,
+              ),
+              Text(getStepText(),
+                  style: GoogleFonts.russoOne(
+                      textStyle: TextStyle(
+                    color: $Color1_background,
+                    decoration: TextDecoration.none,
+                    fontSize:
+                        $ScreenHeight * 3.2, // Font size at 3% of screen height
+                  ))),
+              Divider(
+                thickness: 4,
+                indent: $ScreenWidth * _indent,
+                endIndent: $ScreenWidth * _indent,
+                color: $Color2_accent
+              ),
+              Expanded(
+                child: Stepper(
+                  currentStep: _currentStepIndex,
+                  type: StepperType.horizontal,
+                  onStepCancel: () {
+                    if (_currentStepIndex > 0) {
+                      setState(() {
+                        _currentStepIndex -= 1;
+                      });
+                    }
+                  },
+                  onStepContinue: () {
+                    if (_currentStepIndex < steps.length - 1) {
+                      setState(() {
+                        _currentStepIndex += 1;
+                      });
+                    }
+                  },
+                  onStepTapped: (int index) {
                     setState(() {
-                      _currentStepIndex -= 1;
+                      _currentStepIndex = index;
                     });
-                  }
-                },
-                onStepContinue: () {
-                  if (_currentStepIndex < steps.length - 1) {
-                    setState(() {
-                      _currentStepIndex += 1;
-                    });
-                  }
-                },
-                onStepTapped: (int index) {
-                  setState(() {
-                    _currentStepIndex = index;
-                  });
-                },
-                steps: steps,
+                  },
+                  steps: steps,
+                  elevation: 0.0,
+                ),
               ),
             ],
           ),
