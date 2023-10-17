@@ -261,7 +261,6 @@ class _AuthenticateState extends State<Authenticate> {
                       onPressed: () async {
                         print(_username);
                         print(_password);
-            
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: $Color2_accent,

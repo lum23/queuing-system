@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:queueing_system/screens/index/edit_profile.dart';
 import 'package:queueing_system/screens/index/reservation_stepper.dart';
 
 import '../auth/auth.dart';
@@ -33,18 +32,21 @@ class _HomeState extends State<Home> {
         backgroundColor: $Color1_background,
         toolbarHeight: 80,
         elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfile())),
-              icon: const Icon(Icons.account_circle)
-          ),
-          IconButton(
-              onPressed: () {
-                _auth.signOut();
-              }, 
-              icon: Icon(Icons.square)
-          ),
-        ],
+        // actions: <Widget>[
+          
+          // IconButton(
+          //     // onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfile())),
+          //     onPressed: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (context) => PopupMenuButton(itemBuilder: itemBuilder)
+          //         )
+          //       );
+          //     },
+          //     icon: const Icon(Icons.account_circle)
+          // ),
+        // ],
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(

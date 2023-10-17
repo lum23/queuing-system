@@ -26,7 +26,7 @@ class _WrapperState extends State<Wrapper> {
     }
     else{
       // ignore: prefer_const_constructors
-      return Home();
+      return const Home();
     }
   }
 }

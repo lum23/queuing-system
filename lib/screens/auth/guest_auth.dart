@@ -281,10 +281,7 @@ class _GuestAuthState extends State<GuestAuth> {
                       print(result);
                       // Add the navigation code here
                       // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Wrapper()),
-                      );
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => const Wrapper()));
                     }
 
                     
@@ -330,7 +327,10 @@ class _GuestAuthState extends State<GuestAuth> {
                           fontWeight: FontWeight.w100)),
                     ),
                     TextButton(
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Authenticate())),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Authenticate()));
+                      },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero
                       ),
