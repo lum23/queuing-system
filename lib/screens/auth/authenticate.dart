@@ -26,6 +26,7 @@ class _AuthenticateState extends State<Authenticate> {
 
   String _username = '';
   String _password = '';
+  String _authError = '';
 
   final AuthFirebase _auth = AuthFirebase();
   final _formKey = GlobalKey<FormState>();
@@ -81,7 +82,21 @@ class _AuthenticateState extends State<Authenticate> {
                             fontWeight: FontWeight.w100)),
                   ),
                   SizedBox(
-                    height: $ScreenHeight * 2.5, // Spacing at 2.5% of screen height
+                    height: $ScreenHeight * .5,
+                  ),
+                  SizedBox(
+                    height: $ScreenHeight * 2, // Spacing at 2.5% of screen height
+                    child: Text(
+                      _authError,
+                      style: GoogleFonts.shipporiAntique(
+                        textStyle: TextStyle(
+                        color: Colors.red[400],
+                        decoration: TextDecoration.underline,
+                        fontSize:
+                            $ScreenHeight * 1.4, // Font size at 3% of screen height
+                        )
+                      ),
+                    ),
                   ),
                   //* START OF TEXTFIELDS
                   Column(
@@ -287,7 +302,15 @@ class _AuthenticateState extends State<Authenticate> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           dynamic result = await _auth.signIn(_username, _password);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => WillPopScope(child: const Wrapper(), onWillPop: () async => false)));
+                          if (result == null) {
+                            setState(() {
+                              _authError = 'There\'s an error logging in.';
+                            });
+                          }
+                          else {
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => WillPopScope(child: const Wrapper(), onWillPop: () async => false)));
+                          }
                         };
                       },
                       style: ElevatedButton.styleFrom(
