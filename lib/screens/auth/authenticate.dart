@@ -4,6 +4,8 @@ import 'package:queueing_system/screens/auth/auth.dart';
 import 'package:queueing_system/screens/auth/guest_auth.dart';
 import 'package:queueing_system/screens/auth/student_signup.dart';
 
+import '../wrapper.dart';
+
 class Authenticate extends StatefulWidget {
   const Authenticate({Key? key}) : super(key: key);
 
@@ -26,6 +28,7 @@ class _AuthenticateState extends State<Authenticate> {
   String _password = '';
 
   final AuthFirebase _auth = AuthFirebase();
+  final _formKey = GlobalKey<FormState>();
   
   @override
   Widget build(BuildContext context) {
@@ -40,6 +43,7 @@ class _AuthenticateState extends State<Authenticate> {
           child: SingleChildScrollView(
             reverse: true,
             child: Form(
+              key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,22 +102,36 @@ class _AuthenticateState extends State<Authenticate> {
                       ),
                       SizedBox(
                         width: $ScreenWidth * 80,
-                        height: $ScreenHeight * 4.5,
+                        height: $ScreenHeight * 6,
                         child: TextFormField(
+                          validator: (value) => value!.isEmpty ? 'Enter a valid email' : null,
                           scrollPadding: const EdgeInsets.only(bottom: 150),
                           onChanged: (value) {
                             setState(() => _username = value);
                           },
                           decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
-                                  borderSide: BorderSide(color: $Color4_gray)
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
-                                  borderSide: const BorderSide(color: Colors.white)
-                              ),
-                              isDense: true
+                            contentPadding: EdgeInsets.symmetric(vertical: $ScreenHeight * 1, horizontal: $ScreenHeight * 1),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular($ScreenHeight * 1),
+                              borderSide: const BorderSide(color: Colors.red)
+                            ),
+                            errorStyle: const TextStyle(
+                              fontSize: 12,
+                              height: 0.5
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular($ScreenHeight * 1),
+                                borderSide: const BorderSide(color: Colors.white)
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
+                                borderSide: BorderSide(color: $Color4_gray)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
+                                borderSide: const BorderSide(color: Colors.white)
+                            ),
+                            isDense: true
                           ),
                           style: TextStyle(
                             color: $Color4_gray
@@ -121,9 +139,6 @@ class _AuthenticateState extends State<Authenticate> {
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: $ScreenHeight * 2, // Spacing at 2.5% of screen height
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,22 +158,36 @@ class _AuthenticateState extends State<Authenticate> {
                       ),
                       SizedBox(
                         width: $ScreenWidth * 80,
-                        height: $ScreenHeight * 4.5,
+                        height: $ScreenHeight * 6,
                         child: TextFormField(
+                          validator: (value) => value!.isEmpty ? 'Enter a valid password' : null,
                           onChanged: (value) {
                             setState(() => _password = value);
                           },
                           obscureText: true,
                           decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
-                                  borderSide: BorderSide(color: $Color4_gray)
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
-                                  borderSide: const BorderSide(color: Colors.white)
-                              ),
-                              isDense: true
+                            contentPadding: EdgeInsets.symmetric(vertical: $ScreenHeight * 1, horizontal: $ScreenHeight * 1),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular($ScreenHeight * 1),
+                              borderSide: const BorderSide(color: Colors.red)
+                            ),
+                            errorStyle: const TextStyle(
+                              fontSize: 12,
+                              height: 0.5
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular($ScreenHeight * 1),
+                                borderSide: const BorderSide(color: Colors.white)
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
+                                borderSide: BorderSide(color: $Color4_gray)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
+                                borderSide: const BorderSide(color: Colors.white)
+                            ),
+                            isDense: true
                           ),
                           style: TextStyle(
                             color: $Color4_gray
@@ -168,9 +197,6 @@ class _AuthenticateState extends State<Authenticate> {
                     ],
                   ),
                   //* END OF TEXTFIELDS
-                  SizedBox(
-                    height: $ScreenHeight * .5,
-                  ),
                   //* START Remember password & Forgot Password
                   SizedBox(
                     width: $ScreenWidth * 80,
@@ -259,8 +285,10 @@ class _AuthenticateState extends State<Authenticate> {
                     height: $ScreenHeight * 5.5,
                     child: ElevatedButton(
                       onPressed: () async {
-                        print(_username);
-                        print(_password);
+                        if (_formKey.currentState!.validate()) {
+                          dynamic result = await _auth.signIn(_username, _password);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WillPopScope(child: const Wrapper(), onWillPop: () async => false)));
+                        };
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: $Color2_accent,
@@ -289,7 +317,7 @@ class _AuthenticateState extends State<Authenticate> {
                     width: $ScreenWidth * 80,
                     height: $ScreenHeight * 5.5,
                     child: ElevatedButton(
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const GuestAuth())),
+                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => WillPopScope(child: const GuestAuth(), onWillPop: () async => false))),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: $Color4_gray,
                         shape: RoundedRectangleBorder(
@@ -331,7 +359,7 @@ class _AuthenticateState extends State<Authenticate> {
                               fontWeight: FontWeight.w100)),
                         ),
                         TextButton(
-                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const StudentSignup())),
+                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => WillPopScope(child: const StudentSignup(), onWillPop: () async => false))),
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero
                           ),

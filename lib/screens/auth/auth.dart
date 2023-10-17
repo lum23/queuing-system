@@ -33,12 +33,17 @@ class AuthFirebase{
   }
   //* Signin email, pass
   Future signIn(String email, String password) async {
-    // try{
-    //   AuthRes
-    // }
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      return _userFromFireBase(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    } 
   }
   //* Signup
-  Future registerEmailAndPassword(String email, String password, String firstName, String lastName, String idNumber, String phoneNumber, String course) async {
+  Future register(String email, String password, String firstName, String lastName, String idNumber, String phoneNumber, String course) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:queueing_system/screens/auth/auth.dart';
 import 'package:queueing_system/screens/auth/authenticate.dart';
+import 'package:queueing_system/screens/wrapper.dart';
 
 class StudentSignup extends StatefulWidget {
   const StudentSignup({ Key? key }) : super(key: key);
@@ -543,17 +544,17 @@ class _StudentSignupState extends State<StudentSignup> {
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(vertical: $ScreenHeight * 1, horizontal: $ScreenHeight * 1),
                               errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular($ScreenHeight * 1),
-                                        borderSide: const BorderSide(color: Colors.red)
-                                      ),
-                                      errorStyle: const TextStyle(
-                                        fontSize: 12,
-                                        height: 0.5
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular($ScreenHeight * 1),
-                                          borderSide: const BorderSide(color: Colors.white)
-                                      ),
+                                borderRadius: BorderRadius.circular($ScreenHeight * 1),
+                                borderSide: const BorderSide(color: Colors.red)
+                              ),
+                              errorStyle: const TextStyle(
+                                fontSize: 12,
+                                height: 0.5
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular($ScreenHeight * 1),
+                                  borderSide: const BorderSide(color: Colors.white)
+                              ),
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular($ScreenHeight * 1.2),
                                     borderSide: BorderSide(color: $Color4_gray)
@@ -581,8 +582,9 @@ class _StudentSignupState extends State<StudentSignup> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              // dynamic result = await _auth.registerEmailAndPassword(_email, _password, _FirstName, _LastName, _IDnumber, _PhoneNumber, _Course);
-                              dynamic result = await _auth.registerEmailAndPassword(_email, _password, _FirstName, _LastName, _IDnumber, _PhoneNumber, _Course);
+                              dynamic result = await _auth.register(_email, _password, _FirstName, _LastName, _IDnumber, _PhoneNumber, _Course);
+                              // ignore: use_build_context_synchronously
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => WillPopScope(child: const Wrapper(), onWillPop: () async => false)));
                               if (result == null){
                                 setState(() => _error = 'error');
                               }
